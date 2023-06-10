@@ -29,7 +29,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          build-arg: COLOR=blue
+          build-args: COLOR=blue
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:blue
@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          build-arg: COLOR=green
+          build-args: COLOR=green
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:green
