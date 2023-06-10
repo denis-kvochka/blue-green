@@ -1,5 +1,6 @@
-# Use busybox as the base image
-FROM busybox
+FROM alpine
+
+RUN apk add --no-cache tini busybox-extras
 
 # Set environment variable
 ARG COLOR
@@ -15,5 +16,6 @@ RUN sed -i "s/{{COLOR}}/${COLOR}/g" /web_root/index.html
 # Expose the port for the http server
 EXPOSE 80
 
-# Start the http server
+# Start the http server, handle signals using tini
+ENTRYPOINT ["/sbin/tini", "-g", "--"]
 CMD ["httpd", "-f", "-h", "/web_root", "-p", "80"]
