@@ -12,14 +12,6 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - linux/amd64
-          - linux/arm/v6
-          - linux/arm/v7
-          - linux/arm64
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -42,7 +34,7 @@ jobs:
           context: .
           build-args: COLOR=blue
           push: true
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
           tags: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:blue
 
       - name: Build and push Green image
@@ -51,5 +43,5 @@ jobs:
           context: .
           build-args: COLOR=green
           push: true
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
           tags: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:green
