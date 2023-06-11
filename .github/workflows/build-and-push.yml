@@ -31,9 +31,8 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Build Blue image for testing
+      - name: Build image for testing
         uses: docker/build-push-action@v4
-        id: build-blue
         with:
           context: .
           build-args: COLOR=blue
@@ -46,9 +45,9 @@ jobs:
           docker run -d --name temp-blue-server -p 8080:80 ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:test
           sleep 5
           curl -v http://localhost:8080/fail 2>&1 | tee output.txt
-          if ! (grep -q "HTTP/1.1 200 OK" output.txt); then exit 1; fi
+          if ! (grep -q "HTTP/1.1 200 OK" output.txt); then echo "Error: Invalid HTTP status code"; exit 1; fi
           content_length=$(grep -Eo 'Content-Length: [0-9]+' output.txt | grep -Eo '[0-9]+')
-          if ! [ "$content_length" -gt 400 -a "$content_length" -lt 500 ]; then exit 1; fi
+          if ! [ "$content_length" -gt 400 -a "$content_length" -lt 500 ]; then echo "Error: Content-Length is not within the acceptable range. Received: $content_length"; exit 1; fi
           docker stop temp-blue-server
           docker rm temp-blue-server
 
