@@ -46,7 +46,9 @@ jobs:
           docker run -d --name temp-blue-server -p 8080:80 ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:test
           sleep 5
           curl -v http://localhost:8080/fail 2>&1 | tee output.txt
-          (grep -q "HTTP/1.1 200 OK" output.txt) && (grep -Eo 'Content-Length: [0-9]+' output.txt | grep -Eo '[0-9]+' | awk '{ if ($1 > 400 && $1 < 500) exit 0; else exit 1}')
+          if ! (grep -q "HTTP/1.1 200 OK" output.txt); then exit 1; fi
+          content_length=$(grep -Eo 'Content-Length: [0-9]+' output.txt | grep -Eo '[0-9]+')
+          if ! [ "$content_length" -gt 400 -a "$content_length" -lt 500 ]; then exit 1; fi
           docker stop temp-blue-server
           docker rm temp-blue-server
 
