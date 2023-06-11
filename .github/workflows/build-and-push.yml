@@ -1,6 +1,7 @@
 name: Build and Push Docker images
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -36,12 +37,13 @@ jobs:
         with:
           context: .
           build-args: COLOR=blue
+          load: true
           platforms: linux/amd64
-          tags: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:blue
+          tags: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:test
 
       - name: Test Blue image
         run: |
-          docker run -d --name temp-blue-server -p 8080:80 ${{ steps.build-blue.outputs.digest }}
+          docker run -d --name temp-blue-server -p 8080:80 ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:test
           sleep 5
           curl -v http://localhost:8080/fail 2>&1 | tee output.txt
           (grep -q "HTTP/1.1 200 OK" output.txt) && (grep -Eo 'Content-Length: [0-9]+' output.txt | grep -Eo '[0-9]+' | awk '{ if ($1 > 400 && $1 < 500) exit 0; else exit 1}')
@@ -49,18 +51,15 @@ jobs:
           docker rm temp-blue-server
 
       - name: Build and Push Blue images
-        if: success()
         uses: docker/build-push-action@v4
         with:
           context: .
           build-args: COLOR=blue
-          cache-from: ${{ steps.build-blue.outputs.cache-from }}
           push: true
           platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
           tags: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:blue
 
       - name: Build and push Green image
-        if: success()
         uses: docker/build-push-action@v4
         with:
           context: .
