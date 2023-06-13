@@ -12,8 +12,8 @@ To run this web server, you need to have Docker installed on your system.
 To start a blue/green web server container:
 
 ```bash
-docker run -d --name my-blue  -p 80:80 docker.io/kirbah/blue-green:blue
-docker run -d --name my-green -p 82:80 docker.io/kirbah/blue-green:green
+docker run -d --name my-blue  -p 80:8080 docker.io/kirbah/blue-green:blue
+docker run -d --name my-green -p 82:8080 docker.io/kirbah/blue-green:green
 ```
 
 It is possible to check requests logs via
