@@ -19,9 +19,9 @@ RUN sed -i "s/{{COLOR}}/${COLOR}/g" /web_root/index.html && \
     chown -R httpd /web_root
 
 # Expose the port for the http server
-EXPOSE 80
+EXPOSE 8080
 
 # Run BusyBox httpd, foreground (-f), access logs printed to STDOUT (-v)
 USER httpd
 ENTRYPOINT ["/scripts/entrypoint.sh"]
-CMD ["httpd", "-f", "-v", "-h", "/web_root", "-p", "80"]
+CMD ["httpd", "-f", "-v", "-h", "/web_root", "-p", "8080"]
