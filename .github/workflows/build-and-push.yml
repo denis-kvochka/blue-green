@@ -42,7 +42,7 @@ jobs:
 
       - name: Test Blue image
         run: |
-          docker run -d --name temp-blue-server -p 8080:80 ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:test
+          docker run -d --name temp-blue-server -p 8080:8080 ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:test
           sleep 5
           curl -v http://localhost:8080/ 2>&1 | tee output.txt
           if ! (grep -q "HTTP/1.1 200 OK" output.txt); then echo "Error: Invalid HTTP status code"; exit 1; fi
