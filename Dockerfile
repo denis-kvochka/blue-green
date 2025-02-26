@@ -2,10 +2,10 @@
 FROM busybox:stable-musl
 
 # Set environment variable
-ARG COLOR='blue'
+ARG COLOR
 ENV COLOR=${COLOR}
 
-ARG COMMENT='nothing'
+ARG COMMENT
 ENV COMMENT=${COMMENT}
 
 # Create the web root and scripts directories, add a new user (httpd)

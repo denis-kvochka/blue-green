@@ -4,24 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{COLOR}} :: {{COMMENT}}</title>
+    <title>{{COLOR}}</title>
     <style>
         body {
-            background-color: {{COLOR}};
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial,
+            background-color:   {{COLOR}};
+            display:            flex;
+            justify-content:    center;
+            align-items:        center;
+            height:             100vh;
+            text-align:         center;
+            font-family:        Arial,
             sans-serif;
-            font-size: 48px;
-            color: white;
+            font-size:          48px;
+            color:              white;
+            text-shadow:        4px 4px 4px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
 
 <body>
-    {{COLOR}}<br />
+    Color is "{{COLOR}}"<br />
     {{COMMENT}}
 </body>
 
