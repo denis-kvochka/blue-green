@@ -16,19 +16,19 @@ The web server runs on port 8080 and serves a simple HTML page indicating the ch
 ```bash
 ## blue
 docker build --build-arg COLOR=blue -t blue-green:blue .
-docker run -d --rm --name color-blue -p 81:8080 blue-green:blue
+docker run -d --rm --name color-blue -p 80:8080 blue-green:blue
 
 ## green
 docker build --build-arg COLOR=green -t blue-green:green .
 docker run -d --rm --name color-green -p 81:8080 blue-green:green
 
-## default color is white
-docker build -t color:white .
-docker run -d --rm --name color-white -p 80:8080 color:white
+## no color is white
+docker build -t color:no .
+docker run -d --rm --name color-no -p 82:8080 color:no
 
 ## or any other html color name
 docker build --build-arg COLOR=DarkKhaki --build-arg COMMENT=v0.0.x -t color:DarkKhaki .
-docker run -d --rm --name color-DarkKhaki -p 82:8080 color:DarkKhaki
+docker run -d --rm --name color-DarkKhaki -p 83:8080 color:DarkKhaki
 ```
 
 #### View logs
