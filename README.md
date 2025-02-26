@@ -1,6 +1,6 @@
 # Blue-Green Minimalist Web Server
 
-forked from [kirbah/color](https://github.com/kirbah/color)
+forked from [kirbah/blue-green](https://github.com/kirbah/blue-green)
 
 A minimal Busybox httpd based web server with an either blue (default) or green background color (or any other color you wish). In case color name is not correct, the white is used.
 
