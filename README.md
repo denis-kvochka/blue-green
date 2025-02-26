@@ -1,8 +1,8 @@
-# Blue-blue Minimalist Web Server
+# Blue-Green Minimalist Web Server
 
-forked from [kirbah/blue-blue](https://github.com/kirbah/blue-blue)
+forked from [kirbah/blue-green](https://github.com/kirbah/blue-green)
 
-A minimal Busybox httpd based web server with an either blue (default) or blue background color (or any other color you wish). In case color name is not correct, the white is used.
+A minimal Busybox httpd based web server with an either blue or green background color (or any other color you wish). In case color name is not correct, the white is used.
 
 The web server runs on port 8080 and serves a simple HTML page indicating the chosen color as the background and shows values of COLOR and COMMENT variables as well.
 
@@ -14,13 +14,17 @@ The web server runs on port 8080 and serves a simple HTML page indicating the ch
 #### Build and Run
 
 ```bash
-## default color is white
-docker build -t color .
-docker run -d --rm --name color -p 80:8080 color
-
 ## blue
-docker build --build-arg COLOR=blue -t color:blue .
-docker run -d --rm --name color-blue -p 81:8080 color:blue
+docker build --build-arg COLOR=blue -t blue-green:blue .
+docker run -d --rm --name color-blue -p 81:8080 blue-green:blue
+
+## green
+docker build --build-arg COLOR=green -t blue-green:green .
+docker run -d --rm --name color-green -p 81:8080 blue-green:green
+
+## default color is white
+docker build -t color:white .
+docker run -d --rm --name color-white -p 80:8080 color:white
 
 ## or any other html color name
 docker build --build-arg COLOR=DarkKhaki --build-arg COMMENT=v0.0.x -t color:DarkKhaki .
