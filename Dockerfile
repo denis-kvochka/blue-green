@@ -2,7 +2,7 @@
 FROM busybox:stable-musl
 
 # Set environment variable
-ARG COLOR="no color"
+ARG COLOR
 ENV COLOR=${COLOR}
 
 ARG COMMENT

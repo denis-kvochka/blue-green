@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    Color is "{{COLOR}}"<br />
+    ENV COLOR="{{COLOR}}"<br />
     {{COMMENT}}
 </body>
 

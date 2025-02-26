@@ -2,12 +2,7 @@
 
 Thanks to [kirbah/blue-green](https://github.com/kirbah/blue-green)
 
-A minimal Busybox httpd based web server with an either blue or green background color (or any other color you wish). In case color name is not correct, the white is used.
-
-The web server runs on port 8080 and serves a simple HTML page indicating the chosen color as the background and shows values of COLOR and COMMENT variables as well.
-
-![image](https://github.com/kirbah/color/assets/3257689/3fb80c2c-1e00-434b-8f0e-902321a4f8c8)
-
+The web server runs on port 8080 and serves a simple HTML page with the chosen color as the background and shows values of COLOR and COMMENT variables as well.
 
 ## Usage
 
@@ -27,6 +22,7 @@ docker build -t color:no .
 docker run -d --rm --name color-no -p 82:8080 color:no
 
 ## or any other html color name
+## set comment as well
 docker build --build-arg COLOR=DarkKhaki --build-arg COMMENT=v0.0.x -t color:DarkKhaki .
 docker run -d --rm --name color-DarkKhaki -p 83:8080 color:DarkKhaki
 ```
