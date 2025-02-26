@@ -5,8 +5,8 @@ FROM busybox:stable-musl
 ARG COLOR='blue'
 ENV COLOR=${COLOR}
 
-ARG TAG='no tag'
-ENV TAG=${TAG}
+ARG COMMENT='nothing'
+ENV COMMENT=${COMMENT}
 
 # Create the web root and scripts directories, add a new user (httpd)
 RUN mkdir /web_root /scripts && \
@@ -19,7 +19,7 @@ RUN chmod +x /scripts/entrypoint.sh
 # Set up a simple index.html file with a ${COLOR} background
 COPY index.html.template /web_root/index.html
 RUN sed -i "s/{{COLOR}}/${COLOR}/g" /web_root/index.html && \
-    sed -i "s/{{TAG}}/${TAG}/g" /web_root/index.html && \
+    sed -i "s/{{COMMENT}}/${COMMENT}/g" /web_root/index.html && \
     chown -R httpd /web_root
 
 # Expose the port for the http server
